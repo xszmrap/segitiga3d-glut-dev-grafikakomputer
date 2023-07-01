@@ -1,0 +1,441 @@
+#include <windows.h>  // MS Windows
+#include <GL/glut.h>  // GLUT, include glu.h and gl.h
+
+/* Variabel global */
+char title[] = "star";
+GLfloat star = 0.0f;      // Sudut rotasi untuk DIAMOND [BARU]
+int refreshMills = 2;        // KECEPATAN BERPUTAR
+
+/* Inisialisasi Grafik OpenGL */
+void initGL() {
+   glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // Set warna latar belakang menjadi hitam dan tidak tembus pandang
+   glClearDepth(1.0f);                   // Set kedalaman latar belakang menjadi terjauh
+   glEnable(GL_DEPTH_TEST);   // Aktifkan pengujian kedalaman untuk z-culling
+   glDepthFunc(GL_LEQUAL);    // Tetapkan tipe pengujian kedalaman
+   glShadeModel(GL_SMOOTH);   // Aktifkan shading yang halus
+   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  // Koreksi perspektif yang baik
+}
+
+/* Penangan untuk acara repaint window. Dipanggil kembali ketika jendela pertama kali muncul dan
+setiap kali jendela perlu digambar ulang. */
+
+//menampilkan objek 3d
+void display() {
+   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Bersihkan buffer warna dan kedalaman
+   glMatrixMode(GL_MODELVIEW);     // Untuk beroperasi pada matriks model-view
+
+   // Render kubus berwarna yang terdiri dari 6 quad dengan warna yang berbeda
+   glLoadIdentity();                // Setel ulang matriks model-view
+   glTranslatef(-0.7, 0.4f, -15.0f);  // Bergerak ke kanan dan masuk ke layar
+   glRotatef(star, 0, 0, 1);  // Memutar sekitar sumbu (1,1,1) [BARU]
+
+   //inisial
+	
+	// SISI 1 SEGITIGA 1 HIJAU (Bintang 1)
+    glBegin(GL_TRIANGLES);//berhubungan 1 sma lain
+        glColor3f(0, 255, 0);
+        glVertex3f(-0.4517712270093, -0.0423179642227, 0.0f); 
+        glColor3f(0, 255, 0);// warna sumbu
+        glVertex3f(-0.2550466112371, -0.2358175862938, 0.0f); 
+        glColor3f(0, 255, 0);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); 
+	 
+	// SISI 2 SEGITIGA 1 HIJAU (Bintang 1)
+        glColor3f(0, 255, 0);
+        glVertex3f(-0.4517712270093, -0.0423179642227, 0.0f);
+        glColor3f(0, 255, 0);
+        glVertex3f(-0.2550466112371, -0.2358175862938, 0.0f); 
+        glColor3f(0, 255, 0);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f);
+	
+	// SISI 3 SEGITIGA 1 HIJAU (Bintang 1)
+        glColor3f(0, 255, 0);
+        glVertex3f(-0.4517712270093, -0.0423179642227, 0.0f);
+        glColor3f(0, 255, 0);
+        glVertex3f(-0.1824842529605, -0.0020055429579, 0.0f); 
+        glColor3f(0, 255, 0);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f);
+	
+	// SISI 4 SEGITIGA 1 HIJAU (Bintang 1)
+        glColor3f(0, 255, 0);
+        glVertex3f(-0.4517712270093, -0.0423179642227, 0.0f);
+        glColor3f(0, 255, 0);
+        glVertex3f(-0.1824842529605, -0.0020055429579, 0.0f); 
+        glColor3f(0, 255, 0);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f);
+
+
+
+	// SISI 1 SEGITIGA 2 BIRU (Bintang 1)
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.3, -0.5, 0.0f); 
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.0663844797178, -0.3761048122953, 0.0f);
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); 
+        
+	// SISI 2 SEGITIGA 2 BIRU (Bintang 1)
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.3, -0.5, 0.0f); 
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.0663844797178, -0.3761048122953, 0.0f); 
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); 
+	
+	// SISI 3 SEGITIGA 2 BIRU (Bintang 1)
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.3, -0.5, 0.0f);
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.2550466112371, -0.2358175862938, 0.0f); 
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f);
+	
+	// SISI 4 SEGITIGA 2 BIRU (Bintang 1)
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.3, -0.5, 0.0f); 
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.2550466112371, -0.2358175862938, 0.0f);
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f);
+
+
+
+	// SISI 1 SEGITIGA 3 MERAH (Bintang 1)
+        glColor3f(255, 0, 0);
+        glVertex3f(0.1771025447216, -0.4986545729403, 0.0f); 
+        glColor3f(255, 0, 0);
+        glVertex3f(-0.0663844797178, -0.3761048122953, 0.0f); 
+        glColor3f(255, 0, 0);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); 
+	
+	// SISI 2 SEGITIGA 3 MERAH (Bintang 1)
+        glColor3f(255, 0, 0);
+        glVertex3f(0.1771025447216, -0.4986545729403, 0.0f);
+        glColor3f(255, 0, 0);
+        glVertex3f(-0.0663844797178, -0.3761048122953, 0.0f); 
+        glColor3f(255, 0, 0);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f);
+	
+	// SISI 3 SEGITIGA 3 MERAH (Bintang 1)
+        glColor3f(255, 0, 0);
+        glVertex3f(0.1771025447216, -0.4986545729403, 0.0f);
+        glColor3f(255, 0, 0);
+        glVertex3f(0.1335651297556, -0.239042579995, 0.0f); 
+        glColor3f(255, 0, 0);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); 
+	
+	// SISI 4 SEGITIGA 3 MERAH (Bintang 1)
+        glColor3f(255, 0, 0);
+        glVertex3f(0.1771025447216, -0.4986545729403, 0.0f); 
+        glColor3f(255, 0, 0);
+        glVertex3f(0.1335651297556, -0.239042579995, 0.0f); 
+        glColor3f(255, 0, 0);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); 
+
+
+	
+
+
+	// SISI 1 SEGITIGA 4 GRADIENT (Bintang 1)
+        glColor3f(255, 0, 0);
+        glVertex3f(0.3254522549761, -0.0471554547745, 0.0f); 
+        glColor3f(0, 255, 0);
+        glVertex3f(0.1335651297556, -0.239042579995, 0.0f); 
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); 
+	
+	// SISI 2 SEGITIGA 4 GRADIENT (Bintang 1)
+        glColor3f(255, 0, 0);
+        glVertex3f(0.3254522549761, -0.0471554547745, 0.0f);
+        glColor3f(0, 255, 0);
+        glVertex3f(0.1335651297556, -0.239042579995, 0.0f); 
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); 
+	
+	// SISI 3 SEGITIGA 4 GRADIENT (Bintang 1)
+        glColor3f(255, 0, 0);
+        glVertex3f(0.3254522549761, -0.0471554547745, 0.0f); 
+        glColor3f(0, 255, 0);
+        glVertex3f(0.061002771479, 0.0044444444444, 0.0f); 
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f);
+	
+	// SISI 4 SEGITIGA 4 GRADIENT (Bintang 1)
+        glColor3f(255, 0, 0);
+        glVertex3f(0.3254522549761, -0.0471554547745, 0.0f); 
+        glColor3f(0, 255, 0);
+        glVertex3f(0.061002771479, 0.0044444444444, 0.0f); 
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); 
+
+
+
+
+	// SISI 1 SEGITIGA 5 GRADIENT (Bintang 1)
+        glColor3f(255, 0, 0);
+        glVertex3f(-0.061546989166, 0.2495439657344, 0.0f); 
+        glColor3f(0, 255, 0);
+        glVertex3f(0.061002771479, 0.0044444444444, 0.0f); 
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); 
+    
+    // SISI 2 SEGITIGA 5 GRADIENT (Bintang 1)
+        glColor3f(255, 0, 0);
+        glVertex3f(-0.061546989166, 0.2495439657344, 0.0f); 
+        glColor3f(0, 255, 0);
+        glVertex3f(0.061002771479, 0.0044444444444, 0.0f); 
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); 
+
+	// SISI 3 SEGITIGA 5 GRADIENT (Bintang 1)
+        glColor3f(255, 0, 0);
+        glVertex3f(-0.061546989166, 0.2495439657344, 0.0f); 
+        glColor3f(0, 255, 0);
+        glVertex3f(-0.1824842529605, -0.0020055429579, 0.0f); 
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); 
+	
+	// SISI 4 SEGITIGA 5 GRADIENT (Bintang 1)
+	glColor3f(255, 0, 255);
+        glColor3f(255, 0, 0);
+        glVertex3f(-0.061546989166, 0.2495439657344, 0.0f); 
+        glColor3f(0, 255, 0);
+        glVertex3f(-0.1824842529605, -0.0020055429579, 0.0f); 
+        glColor3f(0, 0, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); 
+    glEnd();
+
+
+
+
+
+   // Render a color-cube consisting of 6 quads with different colors
+   glLoadIdentity();                // Setel ulang matriks model-view
+   glTranslatef(0.7, 0.4f, -15.0f);  // Bergerak ke kanan dan masuk ke layar
+   glRotatef(star, 0, 1, 0);  // Memutar sekitar sumbu (1,1,1) [BARU]
+
+
+    //inisial
+	
+    glBegin(GL_TRIANGLES);
+    
+    // SISI 1 SEGITIGA 1 PING (Bintang 2)
+        glColor3f(255, 0, 255);
+        glVertex3f(-0.4517712270093, -0.0423179642227, 0.0f); 
+        glColor3f(255, 0, 255);
+        glVertex3f(-0.2550466112371, -0.2358175862938, 0.0f); 
+        glColor3f(255, 0, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f);
+	
+	// SISI 2 SEGITIGA 1 KUNING (Bintang 2)
+        glColor3f(255, 255, 0);
+        glVertex3f(-0.4517712270093, -0.0423179642227, 0.0f);
+        glColor3f(255, 255, 0);
+        glVertex3f(-0.2550466112371, -0.2358175862938, 0.0f); 
+        glColor3f(255, 255, 0);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f);
+
+	// SISI 3 SEGITIGA 1 BIRU MUDA (Bintang 2)
+        glColor3f(0, 255, 255);
+        glVertex3f(-0.4517712270093, -0.0423179642227, 0.0f); 
+        glColor3f(0, 255, 255);
+        glVertex3f(-0.1824842529605, -0.0020055429579, 0.0f); 
+        glColor3f(0, 255, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); 
+	
+	// SISI 4 SEGITIGA 1 PUTIH (Bintang 2)
+        glColor3f(255, 255, 255);
+        glVertex3f(-0.4517712270093, -0.0423179642227, 0.0f); 
+        glColor3f(255, 255, 255);
+        glVertex3f(-0.1824842529605, -0.0020055429579, 0.0f);
+        glColor3f(255, 255, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); 
+
+
+
+	// SISI 1 SEGITIGA 2 PING (Bintang 2)
+        glColor3f(255, 0, 255);
+        glVertex3f(-0.3, -0.5, 0.0f); 
+        glColor3f(255, 0, 255);
+        glVertex3f(-0.0663844797178, -0.3761048122953, 0.0f); 
+        glColor3f(255, 0, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); 
+	
+	// SISI 2 SEGITIGA 2 KUNING (Bintang 2)
+        glColor3f(255, 255, 0);
+        glVertex3f(-0.3, -0.5, 0.0f); 
+        glColor3f(255, 255, 0);
+        glVertex3f(-0.0663844797178, -0.3761048122953, 0.0f); 
+        glColor3f(255, 255, 0);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); 
+	
+	// SISI 3 SEGITIGA 2 BIRU MUDA (Bintang 2)
+        glColor3f(0, 255, 255);
+        glVertex3f(-0.3, -0.5, 0.0f); 
+        glColor3f(0, 255, 255);
+        glVertex3f(-0.2550466112371, -0.2358175862938, 0.0f); 
+        glColor3f(0, 255, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); 
+	
+	// SISI 4 SEGITIGA 2 PUTIH (Bintang 2)
+        glColor3f(255, 255, 255);
+        glVertex3f(-0.3, -0.5, 0.0f); 
+        glColor3f(255, 255, 255);
+        glVertex3f(-0.2550466112371, -0.2358175862938, 0.0f); 
+        glColor3f(255, 255, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); 
+
+
+
+	// SISI 1 SEGITIGA 3 PING (Bintang 2)
+        glColor3f(255, 0, 255);
+        glVertex3f(0.1771025447216, -0.4986545729403, 0.0f); 
+        glColor3f(255, 0, 255);
+        glVertex3f(-0.0663844797178, -0.3761048122953, 0.0f); 
+        glColor3f(255, 0, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); 
+	
+	// SISI 2 SEGITIGA 3 KUNING (Bintang 2)
+        glColor3f(255, 255, 0);
+        glVertex3f(0.1771025447216, -0.4986545729403, 0.0f); 
+        glColor3f(255, 255, 0);
+        glVertex3f(-0.0663844797178, -0.3761048122953, 0.0f); 
+        glColor3f(255, 255, 0);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); 
+	
+	// SISI 3 SEGITIGA 3 BIRU MUDA (Bintang 2)
+        glColor3f(0, 255, 255);
+        glVertex3f(0.1771025447216, -0.4986545729403, 0.0f); 
+        glColor3f(0, 255, 255);
+        glVertex3f(0.1335651297556, -0.239042579995, 0.0f); 
+        glColor3f(0, 255, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); 
+	
+	// SISI 4 SEGITIGA 3 PUTIH (Bintang 2)
+        glColor3f(255, 255, 255);
+        glVertex3f(0.1771025447216, -0.4986545729403, 0.0f); 
+        glColor3f(255, 255, 255);
+        glVertex3f(0.1335651297556, -0.239042579995, 0.0f); 
+        glColor3f(255, 255, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); 
+
+
+
+
+
+	// SISI 1 SEGITIGA 4 PING (Bintang 2)
+        glColor3f(255, 0, 255);
+        glVertex3f(0.3254522549761, -0.0471554547745, 0.0f); 
+        glColor3f(255, 0, 255);
+        glVertex3f(0.1335651297556, -0.239042579995, 0.0f); 
+        glColor3f(255, 0, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); 
+        
+	// SISI 2 SEGITIGA 4 KUNING (Bintang 2)
+        glColor3f(255, 255, 0);
+        glVertex3f(0.3254522549761, -0.0471554547745, 0.0f); 
+    	glColor3f(255, 255, 0);
+        glVertex3f(0.1335651297556, -0.239042579995, 0.0f); 
+        glColor3f(255, 255, 0);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); 
+
+	// SISI 3 SEGITIGA 4 BIRU MUDA (Bintang 2)
+        glColor3f(0, 255, 255);
+        glVertex3f(0.3254522549761, -0.0471554547745, 0.0f); 
+        glColor3f(0, 255, 255);
+        glVertex3f(0.061002771479, 0.0044444444444, 0.0f); 
+        glColor3f(0, 255, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); 
+
+	// SISI 4 SEGITIGA 4 PUTIH (Bintang 2)
+        glColor3f(255, 255, 255);
+        glVertex3f(0.3254522549761, -0.0471554547745, 0.0f); 
+        glColor3f(255, 255, 255);
+        glVertex3f(0.061002771479, 0.0044444444444, 0.0f); 
+        glColor3f(255, 255, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); 
+
+
+
+
+	// SISI 1 SEGITIGA 5 PING (Bintang 2)
+        glColor3f(255, 0, 255);
+        glVertex3f(-0.061546989166, 0.2495439657344, 0.0f); 
+        glColor3f(255, 0, 255);
+        glVertex3f(0.061002771479, 0.0044444444444, 0.0f); 
+		glColor3f(255, 0, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); 
+        
+	// SISI 2 SEGITIGA 5 KUNING (Bintang 2)
+        glColor3f(255, 255, 0);
+        glVertex3f(-0.061546989166, 0.2495439657344, 0.0f);
+        glColor3f(255, 255, 0);
+        glVertex3f(0.061002771479, 0.0044444444444, 0.0f); 
+        glColor3f(255, 255, 0);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); 
+	
+	// SISI 3 SEGITIGA 5 BIRU MUDA (Bintang 2)
+        glColor3f(0, 255, 255);
+        glVertex3f(-0.061546989166, 0.2495439657344, 0.0f); 
+        glColor3f(0, 255, 255);
+        glVertex3f(-0.1824842529605, -0.0020055429579, 0.0f); 
+        glColor3f(0, 255, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, 0.1f); 
+	
+	// SISI 4 SEGITIGA 5 PUTIH (Bintang 2)
+        glColor3f(255, 255, 255);
+        glVertex3f(-0.061546989166, 0.2495439657344, 0.0f); 
+        glColor3f(255, 255, 255);
+        glVertex3f(-0.1824842529605, -0.0020055429579, 0.0f); 
+        glColor3f(255, 255, 255);
+        glVertex3f(-0.0599344923155, -0.1632552280171, -0.1f); 
+    glEnd();
+
+
+
+
+   glutSwapBuffers();  // Menukar buffer frame depan dan belakang (double buffering)
+
+   // Memperbarui sudut rotasi setelah setiap refresh [BARU]
+
+   star -= 0.90f;
+}
+
+
+/* Dipanggil saat timer berakhir [BARU] */
+void timer(int value) {
+   glutPostRedisplay();      // Mengirim permintaan re-paint untuk mengaktifkan display()
+   glutTimerFunc(refreshMills, timer, 0); // pemanggilan timer selanjutnya beberapa milidetik kemudian
+}
+
+/* Penangan untuk peristiwa perubahan ukuran jendela. Dipanggil saat jendela pertama kali muncul dan
+   setiap kali jendela diubah ukurannya dengan lebar dan tinggi baru */
+void reshape(GLsizei width, GLsizei height) {  // GLsizei untuk bilangan bulat non-negatif
+   // Menghitung rasio aspek jendela baru
+   if (height == 0) height = 1;                // Untuk mencegah pembagian dengan 0
+   GLfloat aspect = (GLfloat)width / (GLfloat)height;
+
+   // Atur tampilan untuk mencakup jendela baru
+   glViewport(0, 0, width, height);
+
+   // Atur rasio aspek volume pemotongan agar sesuai dengan tampilan
+   glMatrixMode(GL_PROJECTION);  // Untuk beroperasi pada matriks Proyeksi
+   glLoadIdentity();             // Setel ulang
+   // Aktifkan proyeksi perspektif dengan fovy, aspek, zNear, dan zFar
+   gluPerspective(10.0f, aspect, 0.1f, 100.0f);  //pengaturan skala
+}
+
+/* Main function: GLUT runs as a console application starting at main() */
+int main(int argc, char** argv) {
+   glutInit(&argc, argv);            // Inisialisasi GLUT
+   glutInitDisplayMode(GLUT_DOUBLE); // Aktifkan mode double buffered
+   glutInitWindowSize(1000, 1000);   // Tetapkan lebar dan tinggi awal jendela
+   glutInitWindowPosition(50, 50); // Letakkan sudut kiri atas jendela awal
+   glutCreateWindow(title);          // Buat jendela dengan judul yang diberikan
+   glutDisplayFunc(display);       // Daftarkan fungsi panggilan kembali untuk peristiwa penggambaran jendela
+   glutReshapeFunc(reshape);       // Daftarkan fungsi panggilan kembali untuk peristiwa perubahan ukuran jendela
+   initGL();                       // Inisialisasi OpenGL kita sendiri
+   glutTimerFunc(0, timer, 0);     // Panggil timer pertama segera [BARU]
+   glutMainLoop();                 // Masuk ke dalam lingkaran pemrosesan peristiwa yang tak terbatas
+   return 0;
+}
